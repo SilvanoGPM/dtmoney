@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
         --text-body: #969cb3;
         --shape: #ffffff;
     }
-    
+
     * {
         margin: 0;
         padding: 0;
