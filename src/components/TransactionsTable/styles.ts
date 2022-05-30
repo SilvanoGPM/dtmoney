@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface SortButtonProps {
+  isActive: boolean;
+}
+
 export const Container = styled.div`
   margin-top: 4rem;
 `;
@@ -14,6 +18,11 @@ export const Table = styled.table`
     text-align: left;
     line-height: 1.5rem;
     padding: 1rem 2rem;
+
+    &:last-child {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   td {
@@ -81,6 +90,33 @@ export const Table = styled.table`
         right: 2rem;
       }
     }
+  }
+`;
+
+export const SortButton = styled.button<SortButtonProps>`
+  text-decoration: ${({ isActive }) => (isActive ? "underline" : "none")};
+  color: ${({ isActive }) => (isActive ? "var(--green)" : "inherit")};
+
+  background-color: transparent;
+  border: 0;
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid var(--green);
+  }
+`;
+
+export const AscButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid var(--green);
   }
 `;
 
