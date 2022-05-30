@@ -1,4 +1,17 @@
 import styled from "styled-components";
+import { darken, transparentize } from "polished";
+
+type ActiveColors = "green" | "red";
+
+interface RadioButtonProps {
+  isActive: boolean;
+  activeColor: ActiveColors;
+}
+
+const colors = {
+  green: "#33cc95",
+  red: "#e52e4d",
+};
 
 export const Container = styled.form`
   input {
@@ -64,7 +77,8 @@ export const Container = styled.form`
       outline: none;
     }
 
-    &:focus::before, &:hover::before {
+    &:focus::before,
+    &:hover::before {
       border-width: 3px;
     }
   }
@@ -74,4 +88,45 @@ export const Title = styled.h2`
   color: var(--text-title);
   font-size: 1.5rem;
   margin-bottom: 2rem;
+`;
+
+export const TransactionTypeContainer = styled.div`
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+`;
+
+export const RadioButton = styled.button<RadioButtonProps>`
+  background-color: ${({ isActive, activeColor }) =>
+    isActive ? transparentize(0.9, colors[activeColor]) : "transparent"};
+
+  height: 4rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d7d7d7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    border-color: ${darken("0.1", "#d7d7d7")};
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--green);
+  }
+`;
+
+export const TransactionTypeLabel = styled.span`
+  display: inline-block;
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: var(--text-title);
 `;
