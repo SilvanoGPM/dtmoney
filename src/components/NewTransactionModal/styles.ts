@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { darken, transparentize } from "polished";
+import { ImSpinner8 } from "react-icons/im";
 
 type ActiveColors = "green" | "red";
 
@@ -40,6 +41,9 @@ export const Container = styled.form`
   }
 
   button[type="submit"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 0 1.5rem;
     height: 4rem;
@@ -53,6 +57,10 @@ export const Container = styled.form`
     transition: filter 0.2s;
     position: relative;
     z-index: 1;
+
+    svg {
+      margin-right: 0.5rem;
+    }
 
     &:hover {
       filter: brightness(0.9);
@@ -129,4 +137,12 @@ export const TransactionTypeLabel = styled.span`
   margin-left: 1rem;
   font-size: 1rem;
   color: var(--text-title);
+`;
+
+export const LoadingIcon = styled(ImSpinner8)`
+  animation: spin 1s infinite linear;
+
+  @keyframes spin {
+    to { transform: rotate(360deg) }
+  }
 `;

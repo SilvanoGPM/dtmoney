@@ -24,6 +24,13 @@ export const Button = styled.button`
   padding: 0 2rem;
   height: 3rem;
   transition: filter 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5rem;
+  }
 
   &:hover {
     filter: brightness(0.9);

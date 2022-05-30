@@ -1,8 +1,8 @@
 import { useState, FormEvent } from "react";
 import Modal from "react-modal";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import { useTransactions } from "../../contexts/TransactionsContext";
-import { api } from "../../services/api";
 
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
@@ -30,6 +30,8 @@ export function NewTransactionModal({
 
   const [type, setType] = useState<TransactionType>("DEPOSIT");
 
+  const [isAddingTransaction, setIsAddingTransaction] = useState(false);
+
   function resetValues() {
     setTitle("");
     setCategory("");
@@ -41,33 +43,36 @@ export function NewTransactionModal({
     event.preventDefault();
 
     if (!title) {
-      toast.warn('Insira o título da transação');
+      toast.warn("Insira o título da transação");
       return;
     }
 
     if (amount <= 0) {
-      toast.warn('Insira apenas valores positivos');
+      toast.warn("Insira apenas valores positivos");
       return;
     }
 
     if (!category) {
-      toast.warn('Insira uma categoria para a transação');
+      toast.warn("Insira uma categoria para a transação");
       return;
     }
 
     try {
+      setIsAddingTransaction(true);
       await addTransaction({ title, amount, category, type });
 
       onRequestClose();
 
       resetValues();
 
-      toast.success('Transação adicionada com sucesso');
+      toast.success("Transação adicionada com sucesso");
     } catch {
       toast.error("Aconteceu um erro ao tentar adicionar esta transação!", {
-        theme: 'colored',
-        position: 'bottom-center',
+        theme: "colored",
+        position: "bottom-center",
       });
+    } finally {
+      setIsAddingTransaction(false);
     }
   }
 
@@ -137,7 +142,14 @@ export function NewTransactionModal({
           onChange={({ target }) => setCategory(target.value)}
         />
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" disabled={isAddingTransaction}>
+          {isAddingTransaction ? (
+            <S.LoadingIcon size={30} />
+          ) : (
+            <AiOutlinePlus size={30} />
+          )}
+          <span>{isAddingTransaction ? 'Cadastrando...' : 'Cadastrar'}</span>
+        </button>
       </S.Container>
     </Modal>
   );
