@@ -1,17 +1,5 @@
-import { useState, useEffect } from "react";
-
-import { api } from "../../services/api";
-
+import { useTransactions } from '../../contexts/TransactionsContext';
 import * as S from "./styles";
-
-interface Transaction {
-  id: number;
-  title: string;
-  amount: number;
-  type: "DEPOSIT" | "WITHDRAW";
-  category: string;
-  createdAt: string;
-}
 
 const locale =
   navigator.languages && navigator.languages.length
@@ -26,13 +14,7 @@ const numberFormatter = new Intl.NumberFormat(locale, {
 const dateFormatter = new Intl.DateTimeFormat(locale);
 
 export function TransactionsTable() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    api
-      .get<{ transactions: Transaction[] }>("/transactions")
-      .then(({ data }) => setTransactions(data.transactions));
-  }, []);
+  const { transactions } = useTransactions();
 
   function formatAmount(amount: number) {
     return numberFormatter.format(amount);

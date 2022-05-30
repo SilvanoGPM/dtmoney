@@ -1,10 +1,15 @@
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import totalImg from '../../assets/total.svg';
+import { useTransactions } from '../../contexts/TransactionsContext';
 
 import * as S from './styles';
 
 export function Summary() {
+  const { transactions } = useTransactions();
+
+  console.log(transactions);
+
   return (
     <S.Container>
       <S.Card>
