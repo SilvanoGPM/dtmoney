@@ -1,14 +1,24 @@
-import incomeImg from '../../assets/income.svg';
-import outcomeImg from '../../assets/outcome.svg';
-import totalImg from '../../assets/total.svg';
-import { useTransactions } from '../../contexts/TransactionsContext';
+import { useTransactions } from "../../contexts/TransactionsContext";
+import incomeImg from "../../assets/income.svg";
+import outcomeImg from "../../assets/outcome.svg";
+import totalImg from "../../assets/total.svg";
 
-import * as S from './styles';
+import * as S from "./styles";
+import { formatAmount } from "../../utils/formatters";
 
 export function Summary() {
   const { transactions } = useTransactions();
 
-  console.log(transactions);
+  function calculateTransactionsType(type: 'WITHDRAW' | 'DEPOSIT')  {
+    return transactions.reduce((acc, transaction) => {
+      const value = transaction.type === type ? transaction.amount : 0;
+      return (acc += value);
+    }, 0);
+  }
+
+  const deposits = calculateTransactionsType('DEPOSIT');
+  const withdraws = calculateTransactionsType('WITHDRAW');
+  const total = deposits - withdraws;
 
   return (
     <S.Container>
@@ -18,7 +28,7 @@ export function Summary() {
           <img alt="Income icon" src={incomeImg} />
         </S.CardHeader>
 
-        <S.CardContent>R$ 1000,00</S.CardContent>
+        <S.CardContent>{formatAmount(deposits)}</S.CardContent>
       </S.Card>
 
       <S.Card>
@@ -27,7 +37,7 @@ export function Summary() {
           <img alt="Outcome icon" src={outcomeImg} />
         </S.CardHeader>
 
-        <S.CardContent>- R$ 500,00</S.CardContent>
+        <S.CardContent>{formatAmount(withdraws * -1)}</S.CardContent>
       </S.Card>
 
       <S.Card className="highlight">
@@ -36,7 +46,7 @@ export function Summary() {
           <img alt="Total icon" src={totalImg} />
         </S.CardHeader>
 
-        <S.CardContent>R$ 500,00</S.CardContent>
+        <S.CardContent>{formatAmount(total)}</S.CardContent>
       </S.Card>
     </S.Container>
   );
