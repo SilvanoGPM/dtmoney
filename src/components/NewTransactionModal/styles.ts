@@ -25,6 +25,10 @@ export const Container = styled.form`
     font-size: 1rem;
     font-weight: 400;
 
+    @media (max-width: 480px) {
+      height: 3rem;
+    }
+
     &::placeholder {
       color: var(--text-body);
     }
@@ -57,6 +61,10 @@ export const Container = styled.form`
     transition: filter 0.2s;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 480px) {
+      height: 3rem;
+    }
 
     svg {
       margin-right: 0.5rem;
@@ -96,6 +104,10 @@ export const Title = styled.h2`
   color: var(--text-title);
   font-size: 1.5rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const TransactionTypeContainer = styled.div`
@@ -116,6 +128,10 @@ export const RadioButton = styled.button<RadioButtonProps>`
   align-items: center;
   justify-content: center;
   transition: border-color 0.2s;
+
+  @media (max-width: 480px) {
+    height: 3rem;
+  }
 
   img {
     width: 20px;
@@ -143,6 +159,8 @@ export const LoadingIcon = styled(ImSpinner8)`
   animation: spin 1s infinite linear;
 
   @keyframes spin {
-    to { transform: rotate(360deg) }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;

@@ -8,6 +8,8 @@ export function TransactionsTable() {
 
   return (
     <S.Container>
+      <S.Title>Listagem</S.Title>
+
       <S.Table>
         <thead>
           <tr>
@@ -23,11 +25,11 @@ export function TransactionsTable() {
             ({ id, title, amount, type, category, createdAt }) => (
               <tr key={id}>
                 <td>{title}</td>
-                <td className={type.toLowerCase()}>
+                <td className={`amount ${type.toLowerCase()}`}>
                   {formatAmount(amount * (type === "WITHDRAW" ? -1 : 1))}
                 </td>
-                <td>{category}</td>
-                <td>{formatDate(new Date(createdAt))}</td>
+                <td className="category">{category}</td>
+                <td className="createdAt">{formatDate(new Date(createdAt))}</td>
               </tr>
             )
           )}

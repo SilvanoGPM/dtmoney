@@ -32,6 +32,18 @@ export const Button = styled.button`
     margin-right: 0.5rem;
   }
 
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      margin: 0;
+    }
+  }
+
   &:hover {
     filter: brightness(0.9);
   }

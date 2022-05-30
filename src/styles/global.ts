@@ -70,6 +70,11 @@ export const GlobalStyle = createGlobalStyle`
       padding: 3rem;
       position: relative;
       border-radius: 0.25rem;
+      margin: 0 1rem;
+
+      @media (max-width: 480px) {
+        padding: 3rem 1rem;
+      }
     }
 
     .react-modal-close {
