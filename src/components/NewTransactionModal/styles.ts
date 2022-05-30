@@ -120,7 +120,7 @@ export const RadioButton = styled.button<RadioButtonProps>`
 
   &:focus-visible {
     outline: none;
-    border-color: var(--green);
+    border-color: ${({ activeColor }) => colors[activeColor]};
   }
 `;
 

@@ -9,6 +9,7 @@ import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 
 import * as S from "./styles";
+import { toast } from "react-toastify";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -30,14 +31,29 @@ export function NewTransactionModal({
   const [type, setType] = useState<TransactionType>("DEPOSIT");
 
   function resetValues() {
-    setTitle('');
-    setCategory('');
+    setTitle("");
+    setCategory("");
     setAmount(0);
-    setType('DEPOSIT');
+    setType("DEPOSIT");
   }
 
   async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
+
+    if (!title) {
+      toast.warn('Insira o título da transação');
+      return;
+    }
+
+    if (amount <= 0) {
+      toast.warn('Insira apenas valores positivos');
+      return;
+    }
+
+    if (!category) {
+      toast.warn('Insira uma categoria para a transação');
+      return;
+    }
 
     try {
       await addTransaction({ title, amount, category, type });
@@ -45,8 +61,13 @@ export function NewTransactionModal({
       onRequestClose();
 
       resetValues();
-    } catch (error) {
-      console.log(error);
+
+      toast.success('Transação adicionada com sucesso');
+    } catch {
+      toast.error("Aconteceu um erro ao tentar adicionar esta transação!", {
+        theme: 'colored',
+        position: 'bottom-center',
+      });
     }
   }
 
@@ -66,7 +87,7 @@ export function NewTransactionModal({
         onClick={onRequestClose}
         className="react-modal-close"
       >
-        <img alt="Close new transaction modal" src={closeImg} />
+        <img alt="Fechar modal" src={closeImg} />
       </button>
 
       <S.Container onSubmit={handleCreateNewTransaction}>
@@ -83,6 +104,7 @@ export function NewTransactionModal({
           type="number"
           placeholder="Valor"
           value={amount}
+          min={0}
           onChange={({ target }) => setAmount(Number(target.value))}
         />
 
@@ -93,7 +115,7 @@ export function NewTransactionModal({
             isActive={type === "DEPOSIT"}
             activeColor="green"
           >
-            <img alt="Income" src={incomeImg} />
+            <img alt="Entrada" src={incomeImg} />
             <S.TransactionTypeLabel>Entrada</S.TransactionTypeLabel>
           </S.RadioButton>
 
@@ -103,7 +125,7 @@ export function NewTransactionModal({
             isActive={type === "WITHDRAW"}
             activeColor="red"
           >
-            <img alt="Outcome" src={outcomeImg} />
+            <img alt="Saída" src={outcomeImg} />
             <S.TransactionTypeLabel>Saída</S.TransactionTypeLabel>
           </S.RadioButton>
         </S.TransactionTypeContainer>
