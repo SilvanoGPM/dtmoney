@@ -7,18 +7,9 @@ import * as S from './styles';
 import { formatAmount } from '../../utils/formatters';
 
 export function Summary() {
-  const { transactions } = useTransactions();
+  const { getSummary } = useTransactions();
 
-  function calculateTransactionsType(type: 'WITHDRAW' | 'DEPOSIT') {
-    return transactions.reduce((acc, transaction) => {
-      const value = transaction.type === type ? transaction.amount : 0;
-      return (acc += value);
-    }, 0);
-  }
-
-  const deposits = calculateTransactionsType('DEPOSIT');
-  const withdraws = calculateTransactionsType('WITHDRAW');
-  const total = deposits - withdraws;
+  const { total, deposits, withdraws } = getSummary();
 
   return (
     <S.Container>

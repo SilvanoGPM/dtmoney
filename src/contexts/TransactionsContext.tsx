@@ -16,6 +16,7 @@ type TransactionToCreate = Omit<Transaction, 'id' | 'createdAt'>;
 interface TransactionsContextProps {
   transactions: Transaction[];
   addTransaction: (transaction: TransactionToCreate) => Promise<void>;
+  getSummary: () => { total: number; deposits: number; withdraws: number };
 }
 
 interface TransactionsProviderProps {
@@ -46,8 +47,25 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     setTransactions([transaction, ...transactions]);
   }
 
+  function getSummary() {
+    function calculateTransactionsType(type: 'WITHDRAW' | 'DEPOSIT') {
+      return transactions.reduce((acc, transaction) => {
+        const value = transaction.type === type ? transaction.amount : 0;
+        return (acc += value);
+      }, 0);
+    }
+
+    const deposits = calculateTransactionsType('DEPOSIT');
+    const withdraws = calculateTransactionsType('WITHDRAW');
+    const total = deposits - withdraws;
+
+    return { total, deposits, withdraws };
+  }
+
   return (
-    <TransactionsContext.Provider value={{ transactions, addTransaction }}>
+    <TransactionsContext.Provider
+      value={{ transactions, addTransaction, getSummary }}
+    >
       {children}
     </TransactionsContext.Provider>
   );
