@@ -26,7 +26,7 @@ createServer({
           type: "WITHDRAW",
           category: "Casa",
           amount: 1200,
-          createdAt: new Date('2022-12-05 07:00:00'),
+          createdAt: new Date('2022-05-12 07:00:00'),
         },
       ],
     });

@@ -106,7 +106,7 @@ export function TransactionsTable() {
           {transactions
             .sort(sortTransactions)
             .map(({ id, title, amount, type, category, createdAt }) => (
-              <tr key={id}>
+              <tr key={id} className={`amount ${type.toLowerCase()}`}>
                 <td>{title}</td>
                 <td className={`amount ${type.toLowerCase()}`}>
                   {formatAmount(amount * (type === "WITHDRAW" ? -1 : 1))}

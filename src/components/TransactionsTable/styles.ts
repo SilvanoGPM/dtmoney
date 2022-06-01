@@ -26,6 +26,36 @@ export const Table = styled.table`
     }
   }
 
+  tbody tr {
+    &.deposit {
+      td:first-child {
+        border-left: 0.5rem solid var(--green);
+      }
+
+      @media (max-width: 620px) {
+        border-left: 0.5rem solid var(--green);
+
+        td:first-child {
+          border-left: 0;
+        }
+      }
+    }
+
+    &.withdraw {
+      td:first-child {
+        border-left: 0.5rem solid var(--red);
+      }
+
+      @media (max-width: 620px) {
+        border-left: 0.5rem solid var(--red);
+
+        td:first-child {
+          border-left: 0;
+        }
+      }
+    }
+  }
+
   td {
     padding: 1rem 2rem;
     border: 0;
@@ -120,6 +150,7 @@ export const SortButton = styled.button<SortButtonProps>`
   text-decoration: ${({ isActive }) => (isActive ? "underline" : "none")};
   color: ${({ isActive }) => (isActive ? "var(--green)" : "inherit")};
 
+  text-align: left;
   background-color: transparent;
   border: 0;
   width: 100%;
@@ -133,7 +164,10 @@ export const SortButton = styled.button<SortButtonProps>`
   @media (max-width: 620px) {
     background-color: ${({ isActive }) =>
       isActive ? "var(--green)" : "inherit"};
+
     color: ${({ isActive }) => (isActive ? "#ffffff" : "inherit")};
+
+    text-align: center;
   }
 `;
 
