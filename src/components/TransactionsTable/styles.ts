@@ -6,6 +6,7 @@ interface SortButtonProps {
 
 export const Container = styled.div`
   margin-top: 4rem;
+  position: relative;
 `;
 
 export const Table = styled.table`
@@ -46,8 +47,30 @@ export const Table = styled.table`
   }
 
   @media (max-width: 620px) {
-    thead {
-      display: none;
+    border-collapse: collapse;
+
+    thead tr {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    th {
+      width: 100%;
+      text-align: center;
+      background-color: transparent;
+      font-size: 1.5rem;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+
+      &:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     tr {
@@ -99,10 +122,18 @@ export const SortButton = styled.button<SortButtonProps>`
 
   background-color: transparent;
   border: 0;
+  width: 100%;
+  height: 100%;
 
   &:focus-visible {
     outline: none;
     border: 1px solid var(--green);
+  }
+
+  @media (max-width: 620px) {
+    background-color: ${({ isActive }) =>
+      isActive ? "var(--green)" : "inherit"};
+    color: ${({ isActive }) => (isActive ? "#ffffff" : "inherit")};
   }
 `;
 
@@ -117,6 +148,12 @@ export const AscButton = styled.button`
   &:focus-visible {
     outline: none;
     border: 1px solid var(--green);
+  }
+
+  @media (max-width: 620px) {
+    position: absolute;
+    top: -2rem;
+    right: 0;
   }
 `;
 
