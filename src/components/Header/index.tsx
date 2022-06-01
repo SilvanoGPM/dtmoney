@@ -1,8 +1,8 @@
 import { BiMoney } from 'react-icons/bi';
 
-import logoImg from "../../assets/logo.svg";
+import logoImg from '../../assets/logo.svg';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 interface HeaderProps {
   onNewTransactionClick: () => void;
@@ -18,8 +18,6 @@ export function Header({ onNewTransactionClick }: HeaderProps) {
           <BiMoney color="white" size={20} />
           <span>Nova transação</span>
         </S.Button>
-
-
       </S.Content>
     </S.Container>
   );

@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { darken, transparentize } from "polished";
-import { ImSpinner8 } from "react-icons/im";
+import styled from 'styled-components';
+import { darken, transparentize } from 'polished';
+import { ImSpinner8 } from 'react-icons/im';
 
-type ActiveColors = "green" | "red";
+type ActiveColors = 'green' | 'red';
 
 interface RadioButtonProps {
   isActive: boolean;
@@ -10,8 +10,8 @@ interface RadioButtonProps {
 }
 
 const colors = {
-  green: "#33cc95",
-  red: "#e52e4d",
+  green: '#33cc95',
+  red: '#e52e4d',
 };
 
 export const Container = styled.form`
@@ -44,7 +44,7 @@ export const Container = styled.form`
     }
   }
 
-  button[type="submit"] {
+  button[type='submit'] {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,7 +77,7 @@ export const Container = styled.form`
     &::before {
       --gap: 6px;
 
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       border-radius: 0.5rem;
@@ -119,7 +119,7 @@ export const TransactionTypeContainer = styled.div`
 
 export const RadioButton = styled.button<RadioButtonProps>`
   background-color: ${({ isActive, activeColor }) =>
-    isActive ? transparentize(0.9, colors[activeColor]) : "transparent"};
+    isActive ? transparentize(0.9, colors[activeColor]) : 'transparent'};
 
   height: 4rem;
   border-radius: 0.25rem;
@@ -139,7 +139,7 @@ export const RadioButton = styled.button<RadioButtonProps>`
   }
 
   &:hover {
-    border-color: ${darken("0.1", "#d7d7d7")};
+    border-color: ${darken('0.1', '#d7d7d7')};
   }
 
   &:focus-visible {

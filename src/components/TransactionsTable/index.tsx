@@ -1,27 +1,27 @@
-import { BsSortDown, BsSortUpAlt } from "react-icons/bs";
+import { BsSortDown, BsSortUpAlt } from 'react-icons/bs';
 
-import { formatAmount, formatDate } from "../../utils/formatters";
+import { formatAmount, formatDate } from '../../utils/formatters';
 import {
   Transaction,
   useTransactions,
-} from "../../contexts/TransactionsContext";
+} from '../../contexts/TransactionsContext';
 
 type TransactionKey = keyof Transaction;
 
-import * as S from "./styles";
-import { useState } from "react";
+import * as S from './styles';
+import { useState } from 'react';
 
 export function TransactionsTable() {
   const { transactions } = useTransactions();
 
-  const [sortKey, setSortKey] = useState<TransactionKey>("createdAt");
+  const [sortKey, setSortKey] = useState<TransactionKey>('createdAt');
   const [ascOrder, setAscOder] = useState(true);
 
   function sortBy(
     a: Transaction,
     b: Transaction,
     property: TransactionKey,
-    asc = true
+    asc = true,
   ) {
     if (a[property] === b[property]) return 0;
 
@@ -56,39 +56,39 @@ export function TransactionsTable() {
           <tr>
             <th>
               <S.SortButton
-                onClick={handleSetSortKey("title")}
-                isActive={sortKey === "title"}
+                onClick={handleSetSortKey('title')}
+                isActive={sortKey === 'title'}
               >
                 Título
               </S.SortButton>
             </th>
             <th>
               <S.SortButton
-                onClick={handleSetSortKey("amount")}
-                isActive={sortKey === "amount"}
+                onClick={handleSetSortKey('amount')}
+                isActive={sortKey === 'amount'}
               >
                 Valor
               </S.SortButton>
             </th>
             <th>
               <S.SortButton
-                onClick={handleSetSortKey("category")}
-                isActive={sortKey === "category"}
+                onClick={handleSetSortKey('category')}
+                isActive={sortKey === 'category'}
               >
                 Categoria
               </S.SortButton>
             </th>
             <th>
               <S.SortButton
-                onClick={handleSetSortKey("createdAt")}
-                isActive={sortKey === "createdAt"}
+                onClick={handleSetSortKey('createdAt')}
+                isActive={sortKey === 'createdAt'}
               >
                 Data
               </S.SortButton>
 
               <S.AscButton
                 title={`Clique para odernar ${
-                  ascOrder ? "descendentemente" : "ascendentemente"
+                  ascOrder ? 'descendentemente' : 'ascendentemente'
                 }`}
                 onClick={handleToggleAscOrder}
               >
@@ -109,7 +109,7 @@ export function TransactionsTable() {
               <tr key={id} className={`amount ${type.toLowerCase()}`}>
                 <td>{title}</td>
                 <td className={`amount ${type.toLowerCase()}`}>
-                  {formatAmount(amount * (type === "WITHDRAW" ? -1 : 1))}
+                  {formatAmount(amount * (type === 'WITHDRAW' ? -1 : 1))}
                 </td>
                 <td className="category">{category}</td>
                 <td className="createdAt">{formatDate(new Date(createdAt))}</td>

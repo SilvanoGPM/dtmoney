@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface SortButtonProps {
   isActive: boolean;
@@ -147,8 +147,8 @@ export const Table = styled.table`
 `;
 
 export const SortButton = styled.button<SortButtonProps>`
-  text-decoration: ${({ isActive }) => (isActive ? "underline" : "none")};
-  color: ${({ isActive }) => (isActive ? "var(--green)" : "inherit")};
+  text-decoration: ${({ isActive }) => (isActive ? 'underline' : 'none')};
+  color: ${({ isActive }) => (isActive ? 'var(--green)' : 'inherit')};
 
   text-align: left;
   background-color: transparent;
@@ -163,9 +163,9 @@ export const SortButton = styled.button<SortButtonProps>`
 
   @media (max-width: 620px) {
     background-color: ${({ isActive }) =>
-      isActive ? "var(--green)" : "inherit"};
+      isActive ? 'var(--green)' : 'inherit'};
 
-    color: ${({ isActive }) => (isActive ? "#ffffff" : "inherit")};
+    color: ${({ isActive }) => (isActive ? '#ffffff' : 'inherit')};
 
     text-align: center;
   }

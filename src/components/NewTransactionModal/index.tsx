@@ -1,22 +1,22 @@
-import { useState, FormEvent } from "react";
-import Modal from "react-modal";
-import { AiOutlinePlus } from "react-icons/ai";
+import { useState, FormEvent } from 'react';
+import Modal from 'react-modal';
+import { AiOutlinePlus } from 'react-icons/ai';
 
-import { useTransactions } from "../../contexts/TransactionsContext";
+import { useTransactions } from '../../contexts/TransactionsContext';
 
-import closeImg from "../../assets/close.svg";
-import incomeImg from "../../assets/income.svg";
-import outcomeImg from "../../assets/outcome.svg";
+import closeImg from '../../assets/close.svg';
+import incomeImg from '../../assets/income.svg';
+import outcomeImg from '../../assets/outcome.svg';
 
-import * as S from "./styles";
-import { toast } from "react-toastify";
+import * as S from './styles';
+import { toast } from 'react-toastify';
 
 interface NewTransactionModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-type TransactionType = "DEPOSIT" | "WITHDRAW";
+type TransactionType = 'DEPOSIT' | 'WITHDRAW';
 
 export function NewTransactionModal({
   isOpen,
@@ -24,36 +24,36 @@ export function NewTransactionModal({
 }: NewTransactionModalProps) {
   const { addTransaction } = useTransactions();
 
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(0);
 
-  const [type, setType] = useState<TransactionType>("DEPOSIT");
+  const [type, setType] = useState<TransactionType>('DEPOSIT');
 
   const [isAddingTransaction, setIsAddingTransaction] = useState(false);
 
   function resetValues() {
-    setTitle("");
-    setCategory("");
+    setTitle('');
+    setCategory('');
     setAmount(0);
-    setType("DEPOSIT");
+    setType('DEPOSIT');
   }
 
   async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
 
     if (!title) {
-      toast.warn("Insira o título da transação");
+      toast.warn('Insira o título da transação');
       return;
     }
 
     if (amount <= 0) {
-      toast.warn("Insira apenas valores positivos");
+      toast.warn('Insira apenas valores positivos');
       return;
     }
 
     if (!category) {
-      toast.warn("Insira uma categoria para a transação");
+      toast.warn('Insira uma categoria para a transação');
       return;
     }
 
@@ -65,11 +65,11 @@ export function NewTransactionModal({
 
       resetValues();
 
-      toast.success("Transação adicionada com sucesso");
+      toast.success('Transação adicionada com sucesso');
     } catch {
-      toast.error("Aconteceu um erro ao tentar adicionar esta transação!", {
-        theme: "colored",
-        position: "bottom-center",
+      toast.error('Aconteceu um erro ao tentar adicionar esta transação!', {
+        theme: 'colored',
+        position: 'bottom-center',
       });
     } finally {
       setIsAddingTransaction(false);
@@ -116,8 +116,8 @@ export function NewTransactionModal({
         <S.TransactionTypeContainer>
           <S.RadioButton
             type="button"
-            onClick={handleSetTypeChange("DEPOSIT")}
-            isActive={type === "DEPOSIT"}
+            onClick={handleSetTypeChange('DEPOSIT')}
+            isActive={type === 'DEPOSIT'}
             activeColor="green"
           >
             <img alt="Entrada" src={incomeImg} />
@@ -126,8 +126,8 @@ export function NewTransactionModal({
 
           <S.RadioButton
             type="button"
-            onClick={handleSetTypeChange("WITHDRAW")}
-            isActive={type === "WITHDRAW"}
+            onClick={handleSetTypeChange('WITHDRAW')}
+            isActive={type === 'WITHDRAW'}
             activeColor="red"
           >
             <img alt="Saída" src={outcomeImg} />

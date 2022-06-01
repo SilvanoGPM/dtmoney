@@ -4,8 +4,8 @@ const locale =
     : navigator.language;
 
 const numberFormatter = new Intl.NumberFormat(locale, {
-  style: "currency",
-  currency: "BRL",
+  style: 'currency',
+  currency: 'BRL',
 });
 
 const dateFormatter = new Intl.DateTimeFormat(locale);
