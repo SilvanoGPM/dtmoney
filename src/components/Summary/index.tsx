@@ -1,10 +1,11 @@
+import CountUp from 'react-countup';
+
 import { useTransactions } from '../../contexts/TransactionsContext';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import totalImg from '../../assets/total.svg';
 
 import * as S from './styles';
-import { formatAmount } from '../../utils/formatters';
 
 export function Summary() {
   const { getSummary } = useTransactions();
@@ -19,7 +20,15 @@ export function Summary() {
           <img alt="Income icon" src={incomeImg} />
         </S.CardHeader>
 
-        <S.CardContent>{formatAmount(deposits)}</S.CardContent>
+        <S.CardContent>
+          <CountUp
+            end={deposits}
+            decimals={2}
+            decimal=","
+            prefix="R$ "
+            separator="."
+          />
+        </S.CardContent>
       </S.Card>
 
       <S.Card>
@@ -28,7 +37,15 @@ export function Summary() {
           <img alt="Outcome icon" src={outcomeImg} />
         </S.CardHeader>
 
-        <S.CardContent>{formatAmount(withdraws * -1)}</S.CardContent>
+        <S.CardContent>
+          <CountUp
+            end={-withdraws}
+            decimals={2}
+            decimal=","
+            prefix="R$ "
+            separator="."
+          />
+        </S.CardContent>
       </S.Card>
 
       <S.Card className="highlight">
@@ -37,7 +54,15 @@ export function Summary() {
           <img alt="Total icon" src={totalImg} />
         </S.CardHeader>
 
-        <S.CardContent>{formatAmount(total)}</S.CardContent>
+        <S.CardContent>
+          <CountUp
+            end={total}
+            decimals={2}
+            decimal=","
+            prefix="R$ "
+            separator="."
+          />
+        </S.CardContent>
       </S.Card>
     </S.Container>
   );
